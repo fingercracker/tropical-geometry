@@ -1,0 +1,131 @@
+\documentclass[12pt]{amsart}
+\openup 5pt
+
+\usepackage{amssymb,amsthm,amsmath,amsxtra}
+\usepackage[all]{xy}
+\usepackage{fullpage, subcaption}
+\usepackage{pstricks, tikz, tikz-cd}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,patterns}
+\usepackage{comment}
+\usepackage{mathrsfs}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem{prop}[equation]{Proposition}
+\newtheorem{lem}[equation]{Lemma}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{soln}[equation]{Solution}
+\newtheorem{conj}[equation]{Conjecture}
+\newtheorem{stmt}[equation]{Statement}
+\newtheorem{claim}[equation]{Claim}
+\newtheorem{question}{Question}
+\newtheorem*{cor*}{Corollary}
+\newtheorem*{prob*}{Problem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem*{thma*}{Theorem A}
+\newtheorem*{thmb*}{Theorem B}
+
+\theoremstyle{remark}
+\newtheorem{exm}[equation]{Example}
+\newtheorem{defn}[equation]{Definition}
+\newtheorem{rmk}[equation]{Remark}
+
+\newenvironment{enumalph}
+{\begin{enumerate}\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}}
+{\end{enumerate}}
+
+\newenvironment{enumroman}
+{\begin{enumerate}\renewcommand{\labelenumi}{\textnormal{(\roman{enumi})}}}
+{\end{enumerate}}
+
+\setlength{\hfuzz}{4pt}
+
+\newcommand{\todo}[1]{$\Bigl[ \spadesuit\spadesuit$ \textsf{{\bf TO DO} : #1}$\Bigr]$}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\M}{M}
+\DeclareMathOperator{\N}{N}
+\DeclareMathOperator{\nrd}{nrd}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Out}{Out}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Aff}{\mathbf{Aff}}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\img}{Im}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\AC}{AC}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\sing}{sing}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Sch}{\mathbf{Sch}}
+\DeclareMathOperator{\Sets}{\mathbf{Sets}}
+\DeclareMathOperator{\Grass}{\mathbf{Grass}}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\QCoh}{QCoh}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\image}{image}
+\DeclareMathOperator{\Sh}{\textbf{Sh}}
+\DeclareMathOperator{\Pro}{Pro}
+\DeclareMathOperator{\depth}{depth}
+\DeclareMathOperator{\Cone}{\textbf{Cone}}
+\DeclareMathOperator{\ex}{\mathbf{ex}}
+\DeclareMathOperator{\et}{\mathbf{\'et}}
+\DeclareMathOperator{\Ab}{\mathfrak{Ab}}
+\DeclareMathOperator{\Groupoids}{\mathbf{Groupoids}}
+
+\newcommand{\A}{\mathbb A}
+\newcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathbb F}
+\newcommand{\LL}{\mathbb L}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Qbar}{\overline{\mathbb Q}}
+\newcommand{\NN}{\mathbb N}
+
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakH}{\mathfrak{H}}
+\newcommand{\frakN}{\mathfrak{N}}
+\newcommand{\frakp}{\mathfrak{p}}
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakD}{\mathfrak{D}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\frakm}{\mathfrak{m}}
+\newcommand{\Mon}{\mathfrak{Mon}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calV}{\mathcal{V}}
+
+\newcommand{\scrM}{\mathscr{M}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\scrV}{\mathscr{V}}
+\newcommand{\scrZ}{\mathscr{Z}}
+
+\begin{document}
+\title{A Subcanonical Topology for Sharp and Saturated Monoids}
+\author{John Willis, Jonathan Wise}
+\maketitle
