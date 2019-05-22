@@ -1,0 +1,209 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[inline]{enumitem}
+\usepackage[all]{xy}
+
+\theoremstyle{plan}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\numberwithin{lemma}{theorem}
+\numberwithin{corollary}{theorem}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\def\Mon{\mathbf{Mon}}
+\def\ShpMon{\mathbf{ShpMon}}
+\def\Hom{\operatorname{Hom}}
+\def\Cones{\mathbf{Cones}}
+\def\Cone{\operatorname{Cone}}
+\def\Spec{\operatorname{Spec}}
+\def\Sets{\mathbf{Sets}}
+
+
+
+\author{John Willis}
+
+\author{Jonathan Wise}
+\email{jonathan.wise@colorado.edu}
+\address{University of Colorado, Campus Box 395, Boulder, CO, 80309-0395, USA}
+
+\title{A subcanonical topology for tropical geometry}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Conventions}
+
+Throughout this paper, the term \emph{monoid} will be used to refer to an integral, saturated, commutative semigroup with unit.  Monoids will be written additively.
+
+\section{Monoids}
+
+
+\subsection{Sharp monoids}
+
+\begin{definition}
+A homomorphism of monoids $f : N \to M$ is called \emph{sharp} if every unit of $M$ has a unique preimage in $N$.   The monoid $N$ is said to be sharp $N^\ast = \{ 0 \}$.
+\end{definition}
+
+In other words, $f : N \to M$ is sharp if $f^{-1} M^\ast \to M^\ast$ is a bijection.
+
+Let $\Mon / M$ denote the category of pairs $(N, \varphi)$ where $N$ is a monoid and $\varphi : N \to M$ is a homomorphism of monoids, and let $\ShpMon / M$ be the full subcategory in which $\varphi$ is sharp.  
+
+\begin{proposition}
+The inclusion of $\ShpMon / M$ in $\Mon / M$ has a left adjoint.  If $M$ is sharp, it also has a right adjoint.
+\end{proposition}
+\begin{proof}
+The category $\ShpMon / M$ has all small limits and that the functor $\Hom_{\Mon/M}((N,\varphi), -)$ preserves arbitrary limits, so a left adjoint exists by the adjoint functor theorem.
+
+For the right adjoint, fix $(N,\varphi) \in \Mon / M$ and let $N'$ be the largest submonoid of $N$ such that the restriction of $\varphi$ to $N'$ is sharp.  In other words, $N' = \{ 0 \} \cup \varphi^{-1}(M - \{ 0 \})$.  If $(P,\psi) \in \ShpMon / M$ and $\alpha : P \to N$ is a homomorphism over $M$ then $\alpha(P)$ is a submonoid of $N$ that projects sharply to $M$, hence is contained in $N'$.  Therefore any homomorphism $(P,\psi) \to (N,\varphi)$ in $\Mon/M$ factors uniquely through $(N',\varphi \big|_{N'})$, as required.
+\end{proof}
+
+\begin{remark}
+The associated group of a sharp monoid $M$ has trivial torsion subgroup.  Indeed, a torsion element of $M^{\rm gp}$ lies in $M$ by saturation.  It is then an invertible element, hence equal to $0$, since $M$ is sharp.
+\end{remark}
+
+\begin{proposition}
+A homomorphism of sharp monoids $M \to N$ is an epimorphism if and only if $\mathbf Q \otimes M^{\rm gp} \to \mathbf Q \otimes N^{\rm gp}$ is a surjection.
+\end{proposition}
+\begin{proof}
+Suppose that $f : M \to N$ is rationally surjective on associated groups.  Let $g,h : N \to P$ be homomorphisms to a sharp monoid $P$ such that $gf = hf$.  If $x \in N$ then there is some positive integer $\ell$ such that $\ell x = f(y)$ for some $y \in M$.  Then $\ell g(x) = g(\ell x) = gf(y) = hf(y) = h(\ell x) = \ell h(x)$.  But this implies $g(x) - f(x)$ is a torsion element of $P^{\rm gp}$, hence is zero.
+
+Conversely, suppose that $M \to N$ is an epimorphism.  Let $P$ be the saturated image of $N$ in $\mathbf Q \otimes N^{\rm gp} / \mathbf Q \otimes M^{\rm gp}$.  Then $P$ is a sharp monoid and the projection $N \to P$ agrees with $0 : N \to P$ when restricted to $M$.  Since $M \to N$ is an epimorphism, this implies the projection $N \to P$ is the zero map, so $P = 0$, and $\mathbf Q \otimes M^{\rm gp} \to \mathbf Q \otimes N^{\rm gp}$ is surjective.
+\end{proof}
+
+\subsection{Valuative monoids}
+
+\begin{definition}
+A sharp monoid $M$ will be called \emph{valuative} if the partial order on $M^{\rm gp}$ determined by $M$ is a total order.
+\end{definition}
+
+\begin{lemma}
+Every sharp homomorphism of valuative monoids is injective.
+\end{lemma}
+
+\begin{theorem}[Fuchs]
+Every sharp monoid can be embedded in a valuative monoid.
+\end{theorem}
+\begin{proof}
+See \cite[Theorem~2]{Fuchs}.
+\end{proof}
+
+\subsection{Cones}
+
+We write $\Cones$ for the opposite of the category $\ShpMon$ of sharp monoids and write $\Cone M$ to denote the object of $\Cones$ corresponding to $M \in \ShpMon$.   We identify $\Cones$ is the image of $\ShpMon$ under the contravariant Yoneda embedding, so that $\Cone M$ is the functor $\ShpMon \to \Sets$ given by $N \mapsto \Hom_{\ShpMon}(M,N)$.
+
+\begin{proposition}
+The category $\Cones$ admits all small limits and colimits.
+\end{proposition}
+\begin{proof}
+Equivalently, $\ShpMon$ admits all small limits and colimits.  Limits are computed on the underlying sets (one checks that the limit of a diagram of sharp monoids is sharp).  The existence of small limits implies the existence of small colimits, by the adjoint functor theorem.
+\end{proof}
+
+\begin{definition}
+Let $\sigma = \Cone M$ be the cone of a sharp monoid $M$.  The \emph{spectrum} of $M$ is the set of prime ideals of $M$.  The \emph{valuative points} of $M$ are the isomorphism classes of epimorphisms $M \to V$ where $M$ is a valuative, divisible monoid.
+\end{definition}
+
+\begin{theorem}[Gillam]
+The following conditions are equivalent of a morphism of sharp monoids $M \to N$:
+\begin{enumerate}[label=(\roman{*})]
+\item \label{it:surj1} For every homomorphism $M \to M'$ the morphism $M' \to N'$ induced by pushout induces a surjection $\Spec N' \to \Spec M'$.
+\item \label{it:surj2} For every sharp valuative monoid $V$ and every homomorphism $M \to V$, there is a valuative monoid $W$, a sharp homomorphism $V \to W$, and a factorization of $M \to V \to W$ through $N$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+We check first that \ref{it:surj1} implies \ref{it:surj2}.  Suppose that $M \to V$ is a homomorphism where $V$ is a sharp, valuative monoid.  Let $M' = V$ and let $N'$ be the pushout.  Then $\Spec N' \to \Spec M'$ is surjective, so the maximal ideal of $M'$ is the preimage of the maximal ideal of $N'$.  That is, $M' \to N'$ is sharp.  Now choose an embedding of $N'$ in a valuative monoid $W$.  Then we have a commutative diagram:
+\begin{equation} \label{eqn:1} \vcenter{\xymatrix{
+M \ar[r] \ar[d] & M' \ar@{=}[r] \ar[d] & V \ar[d] \\
+N \ar[r] & N' \ar[r] & W
+}}\end{equation}
+The outer rectangle is the requirement of \ref{it:surj2}.
+
+Conversely, suppose that \ref{it:surj2} holds and let $M'$ and $N'$ be as in~\ref{it:surj1}.  Let $P$ be a prime ideal of $M'$.  Localizing at $P$ in $M'$ and $N'$, we may assume that $P$ is the maximal ideal.  Choose an embedding of $M'$ in a valuative monoid $V$.  By~\ref{it:surj1} and the universal property of $N'$ as a pushout, there is a valuative monoid $V$ and a commutative diagram~\eqref{eqn:1}.  Then the maximal ideal of $M'$ is the preimage of the maximal ideal of $V$.  On the other hand, $V \to W$ is sharp, so the maximal ideal of $V$ is the preimage of the maximal ideal of $W$.  Pulling the maximal ideal of $W$ back to $N'$, we obtain a prime ideal of $N'$ whose preimage in $M'$ is the maximal ideal, as required.
+\end{proof}
+
+
+
+\section{Smooth morphisms of monoids}
+
+\begin{definition}
+A homomorphism of monoids $N \to M$ will be called an \emph{infinitesimal extension} if it is surjective and $N$ contains the maximal submonoid of $N^{\rm gp}$ that projects sharply to $M$.
+\end{definition}
+
+\begin{definition}
+A sharp homomorphism of sharp monoids $P \to Q$ will be called, respectively, 
+\begin{enumerate*}[label=(\roman{*})] 
+\item \emph{formally smooth}, 
+\item \emph{formally \'etale}, or 
+\item \emph{formally unramified}
+\end{enumerate*}
+at $Q \to M$ if, for any infinitesimal extension $M' \to M$ and any commutative diagram of solid arrows
+\begin{equation*} \xymatrix{
+P \ar[r] \ar[d] & M' \ar[d] \\
+Q \ar[r] \ar@{-->}[ur] & M
+} \end{equation*}
+there is, respectively,
+\begin{enumerate*}[label=(\roman{*})]
+\item at least one,
+\item exactly one, or
+\item at most one
+\end{enumerate*}
+dashed arrow making the whole diagram commute.
+\end{definition}
+
+\begin{proposition}
+If $f: P \to Q$ is \'etale at a sharp homomorphism $Q \to M$ then $f^{\rm gp}$ is split injective.
+\end{proposition}
+
+\subsection{\'Etale-local splitting of smooth morphisms}
+
+\begin{theorem}
+Suppose that $p : \sigma \to \tau$ is a morphism of cones that is smooth at a point $x \in |\sigma|$.  Then there is an \'etale neighborhood $U$ of $p(x)$ in $\tau$ and a section $s : U \to \sigma$ such that $s(p(x)) = x$.
+\end{theorem}
+
+\begin{corollary}
+The smooth and \'etale topologies on $\Cones$ coincide.
+\end{corollary}
+
+\subsection{Cohomology of the structure sheaf}
+
+\begin{corollary}
+$\mathscr L$ is a sheaf of ordered abelian groups on $\Cones$.
+\end{corollary}
+
+\begin{corollary}
+The \'etale topology on $\Cones$ is subcanonical.
+\end{corollary}
+
+\section{Piecewise linear functions}
+
+\begin{definition}
+Let $\sigma$ be a cone.  A \emph{convex piecewise linear function} is a function on $|\sigma|$ that can be represented as the maximum of a finite set of linear functions.
+\end{definition}
+
+\begin{proposition}
+The locus of linearity of a convex piecewise linear function is open.
+% need to define open and make sure this makes sense
+\end{proposition}
+
+Let $f$ be a convex piecewise linear function on $\sigma$.  The \emph{tropical modification} of $\sigma$ induced by $f$ is the presheaf $\tilde\sigma$ on $\Cones$ with
+\begin{equation*}
+\tilde\sigma(\Cone M) = \{ h \in M^{\rm gp} \: \big| \: \text{$h \leq f$ and $h = f$ over the linear locus of $f$} \} .
+\end{equation*}
+
+\bibliographystyle{amsalpha}
+\bibliography{top}
+
+
+\end{document}
