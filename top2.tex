@@ -1,0 +1,549 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+\author{John Willis}
+\author{Jonathan Wise}
+
+\title{A subcanonical topology on commutative monoids}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition} 
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\def\Mon{\mathbf{Mon}}
+\def\Ext{\operatorname{Ext}}
+\def\Hom{\operatorname{Hom}}
+\def\Cone{\operatorname{Cone}}
+\def\Spec{\operatorname{Spec}}
+\def\Cones{\mathbf{Cones}}
+\def\LogSch{\mathbf{LogSch}}
+\def\logGm{\mathbf{G}_{\log}}
+\def\Gm{\mathbf{G}_m}
+\def\Pic{\mathrm{Pic}}
+\def\LogPic{\mathrm{LogPic}}
+\def\TroPic{\mathrm{TroPic}}
+
+\def\overnorm#1{\overline{#1}\vphantom{#1}}
+
+\def\ologGm{\overnorm{\mathbf G}_m}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+We take the point of view, advocated in \cite{CCUW} and inspired by logarithmic geometry, that tropical moduli problems are covariant functors on the category of commutative monoids (or, essentially equivalently, as presheaves on the category of strongly convex rational polyhedral cones).  With this perspective, it is possible to define tropical moduli functors that admit universal objects. 
+
+Op.\ cit.\ also proposed a notion of algebraicity, roughly analogous to the definition of a Deligne--Mumford stack.  According to this definition, a tropical moduli stack is algebraic if it can be assembled from rational polyhedral cones by gluing along automorphisms of those cones and along face inclusions.  This definition of algebraicity turns out to be too restrictive, and excludes natural moduli problems such as the Picard group of a tropical curve~\cite{logpic}, as well as a number of quotient constructions that show up at the boundaries of moduli spaces.  
+
+The object of this paper is to propose a finer topology, in which all of the above examples do become locally representable.  In this paper we verify only that the moduli space of curves remains a stack in this topology; it is automatically locally representable because it is locally representable in the coarser topology considered in~\cite{CCUW}.  The local representability of the logarithmic Picard group is demonstrated in~\cite{logpic}, and we will return to it in~\cite{criteria}.  
+
+\section{Topological spaces associated to monoids}
+
+\begin{definition} \label{def:monoid}
+By a \emph{monoid} we will mean a commutative, unital, integral, sharp, saturated semigroup.  Equivalently, a monoid is the set of elements that are $\geq 0$ in a saturated, partially ordered abelian group.  The group spanned by a monoid $M$ is denoted $M^{\rm gp}$.
+
+Homomorphisms of monoids are homomorphisms of abelian groups that preserve the \emph{non-strict} order.  Homomorphisms preserving the strict order will be called \emph{sharp}.
+\end{definition}
+
+\begin{definition} \label{def:ideals}
+If $M$ is a monoid then a subset $P \subset M$ is called an \emph{ideal} if $M + P \subset P$.  It called a \emph{prime ideal} if, in addition, the complement of $P$ in $M$ is a submonoid.  The set of prime ideals of $M$ is called the \emph{spectrum} of $M$ and is denoted $\Spec M$.  A subset of $\Spec M$ is called open in the \emph{face topology} if is a finite union of spectra $\Spec M[-f]$, where $f \in M$.
+\end{definition}
+
+\begin{remark}
+The spectrum of a monoid has no nontrivial covers in this topology.
+\end{remark}
+
+We describe another topological space, considered in~\cite{logpic}:
+
+\begin{definition}
+Let $M$ be a monoid.  A \emph{valuation} of $M$ is an extension of the partial order on $M^{\rm gp}$ to a total semiorder.  A \emph{sharp valuation} is an extension of the partial order on $M^{\rm gp}$ to a total order.
+
+We write $|\Cone^\circ M|$ for the set of sharp valuations of $M$.  We give $|\Cone^\circ M|$ the coarsest topology in which the subsets defined by strict inequalities are open.
+\end{definition}
+
+\begin{remark}
+It is also possible to consider the set of all valuations of $M$ as a topological space, but this seems less useful.
+\end{remark}
+
+\begin{proposition}
+Let $M$ be a monoid.  Then $|\Cone^\circ M|$ is quasicompact.
+\end{proposition}
+
+\begin{remark}
+This proposition is \cite[Proposition~2.3.2.3]{logpic}.  For the sake of a self-contained treatment, we include a proof.
+\end{remark}
+
+\begin{proof}
+It is equivalent to demonstrate that $|\Cone^\circ P|$ is quasicompact.  Let $Z_1 \supsetneq Z_2 \supsetneq Z_3 \supsetneq \cdots$ be a descending collection of closed subsets of $|\Cone P|$ with empty intersection.  We wish to show that this chain is finite.
+
+We can write $Z_1$ as a finite union of $Z_1^j$ where $Z_1^j$ is defined by a finite set of non-strict inequalities within $| \Cone P |$.  To show that the chain of $Z_i$ is finite, it will suffice to show that each of the chains $\{ Z_i \cap Z_1^j \}$ is finite.  Repeating this process for $Z_2$, $Z_3$, etc., we find that either the chain of $Z_i$ is finite or there is an infinite chain $Z_1 \supsetneq Z_2 \supsetneq Z_3 \supsetneq \cdots$ where each $Z_i$ is defined relative to $Z_{i-1}$ by a single, non-strict inequality.
+
+For convenience we take $Z_0 = |\Cone^\circ P|$.  Then for each $i$, we have $Z_i = |\Cone^\circ P_i|$ with $P_i = P[\alpha_1, \ldots, \alpha_i]$ for some $\alpha_1, \ldots, \alpha_i \in P^{\rm gp}$.  We have $|\Cone^\circ P[\alpha_1, \alpha_2, \ldots]| = \varnothing$ so $P[\alpha_1, \alpha_2, \ldots]$ must contain a unit.  But then $P[\alpha_1, \ldots, \alpha_n]$ contains a unit for some finite $n$.
+\end{proof}
+
+\section{A Grothendieck topology on monoids}
+
+\begin{definition}
+Let $P$ be a monoid.  We write $\Cone P$ for the covariant functor on $\Mon$ represented by $P$.  The category of cones, $\Cones$, is the opposite of the category of monoids. 
+\end{definition}
+
+\begin{definition}
+We call a homomorphism of monoids $p : N \to M$ an \emph{infinitesimal extension} if it is surjective and, for all $x \in N$, we have $x > 0$ if and only if $p(x) > 0$.
+\end{definition}
+
+\begin{remark} \label{rem:sharp}
+Infinitesimal extensions are sharp.
+\end{remark}
+
+\begin{proposition} \label{prop:spectra}
+If $f : N \to M$ is an infinitesimal extension then $f^{-1}$ induces a bijection on prime spectra.
+\end{proposition}
+\begin{proof}
+We must show that if $P \subset N$ is a prime ideal then $f(P)$ is prime and $P = f^{-1} f(P)$.  Let $K$ be the kernel of $N^{\rm gp} \to M^{\rm gp}$.  Suppose $x \in f^{-1} f(P)$.  We argue that $x + K \subset P$ if $x > 0$.  Indeed, suppose $y \in K$ and $z \in N$ is positive.  Then $x + y + z \in P$, since $P$ is an ideal.  But $P$ is prime, so either $x + y \in P$ or $z \in P$.  If $x + y \not\in P$ then every positive $z \in M$ is in $P$, which means $P$ is the maximal ideal of $M$.  In that case $f(P)$ is clearly prime and $P = f^{-1} f(P)$, since it is the maximal ideal of $M$, and in particular $x + K \subset P$.  Otherwise, there is some positive $z \not\in P$ and then $x + y \in P$ for all $y \in K$ and, again, $P = f^{-1} f(P)$.
+
+Now we may conclude that $f(P)$ is prime by observing that if $f(x) + f(y) \in f(P)$ then $x + y \in f^{-1} f(P) = P$, so either $x \in P$ or $y \in P$, hence $f(x) \in f(P)$ or $f(y) \in f(P)$.
+\end{proof}
+
+\begin{definition}
+Fix homomorphisms of monoids $P \to Q \to M$.  We say that $P \to Q$ is \emph{infinitesimally smooth} (resp.\ \emph{infinitesimally \'etale}) at $Q \to M$ if every commutative diagram~\eqref{eqn:1} (displayed algebraically on the left and geometrically on the right), in which $M'$ is an infinitesimal extension of $M$, has a lift (resp.\ a unique lift):
+\begin{equation} \label{eqn:1} {\xymatrix{
+P \ar[r] \ar[d] & M' \ar[d] \\
+Q \ar[r] \ar@{-->}[ur] & M
+} \hskip2cm \xymatrix{
+\Cone M \ar[r] \ar[d] & \Cone Q \ar[d] \\
+\Cone M' \ar@{-->}[ur] \ar[r] & \Cone P
+}} \end{equation}
+We say it is \emph{smooth} if it is also of finite presentation.
+\end{definition}
+
+\begin{proposition} \label{prop:triv-smooth-etale}
+\begin{enumerate}
+\item If $P \to Q$ is formally smooth (resp.\ formally \'etale) at $Q \to M$ and $M \to N$ is a homomorphism of monoids then $P \to Q$ is formally smooth (resp.\ formally \'etale) at $Q \to N$.
+\item If $P \to Q$ is a localization homomorphism then it is \'etale at every $Q \to M$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+To demonstrate the first assertion, note that if $N' \to N$ is an infinitesimal extension then $N' \mathop\times_N M \to M$ is also an infinitesimal extension.  For the second, suppose we have a lifting problem~\eqref{eqn:1}.  We may assume without loss of generality that $Q = P[-x]$ for some $x \in P$ since $Q$ is an inductive limit of such monoids.  If $f' : P \to M'$ and $f : P \to M$ denote the two maps in diagram~\eqref{eqn:1} then $f(x) = 0$ so we must have $f'(x) = 0$, because $u : M' \to M$ is sharp.  Thus $f' : P \to M'$ factors uniquely through $Q$.
+\end{proof}
+
+\begin{definition}
+A monoid is called \emph{valuative} if its associated group is totally ordered.
+\end{definition}
+
+\begin{definition}
+A family of morphisms of monoids $P \to Q_i$ is called a \emph{smooth (resp.\ \'etale) cover} if, for every valuative monoid $V$ and homomorphism $P \to V$, there is a factorization $P \to Q_i \to V$ through some $Q_i$ such that $P \to Q_i$ is smooth (resp.\ \'etale) at $Q_i \to V$.
+\end{definition}
+
+\begin{proposition}
+Smooth covering families are the covers in a Grothendieck topology on $\Mon^{\rm op}$.
+\end{proposition}
+\begin{proof}
+This is immediate from the fact that covers are defined by a lifting condition.
+\end{proof}
+
+\begin{definition}
+We will write $|\Cone P|$ for the set of points of $\Cone P$ in this Grothendieck topology.
+\end{definition}
+
+\begin{proposition} \label{prop:torsion-free}
+Suppose $P \to Q \to M$ are homomorphisms of monoids, with $Q$ finitely generated relative to $P$.  Consider the following properties:
+\begin{enumerate}[label=(\roman{*})]
+\item \label{it:sm1} $P^{\rm gp} \to Q^{\rm gp}$ is injective with torsion-free cokernel.
+\item \label{it:sm2} $P \to Q$ is smooth at $Q \to M$.
+\end{enumerate}
+Then \ref{it:sm1} implies \ref{it:sm2} and the conditions are equivalent if $P \to M$ is sharp.
+\end{proposition}
+\begin{proof}
+Suppose that $P^{\rm gp} \to Q^{\rm gp}$ is injective with torsion-free cokernel and we have a lifting problem:
+\begin{equation} \label{eqn:3} \vcenter{ \xymatrix{
+P \ar[r]^{f'} \ar[d] & M' \ar[d]^u \\
+Q \ar[r] \ar@{-->}[ur] & M
+} } \end{equation} 
+The obstruction to finding a lift, at the level of associated groups, lies in $\Ext^1(Q^{\rm gp}/P^{\rm gp}, K)$ where $K$ is the kernel of ${M'}^{\rm gp} \to M^{\rm gp}$.  This group vanishes, since $Q^{\rm gp} / P^{\rm gp}$ is a finitely generated, torsion-free abelian group, so a lift exists at the level of associated groups.  But $M' \to M$ is an infinitesimal extension, $Q \to M'$ preserves the non-strict partial order because $Q \to M$ does.  This proves the first implication.
+
+Now assume that $P \to Q$ is smooth at $Q \to M$ and $P \to M$ is sharp.  Let $P^{\rm gp}$ be the underlying abelian group of $P$ and let $M'$ be the maximal submonoid of $M^{\rm gp} \times P^{\rm gp}$ such that projection to $P^{\rm gp}$ induces an infinitesimal extension $u: M' \to M$:
+\begin{equation*}
+M' = \{ (0,0) \} \cup \{ (x,y) \in M^{\rm gp} \times P^{\rm gp}  \: \big| \: x > 0 \}
+\end{equation*}
+The map $f : P \to M$ has a canonical lift to $f' : P \to {M'}^{\rm gp}$ by the formula $f'(x) = (f(x), x)$.  We verify that $f'$ preserves the non-strict order.  Since $P \to M$ is sharp, if $x < y$ in $P$ then $u(f'(x)) = f(x) < f(y) = u(f'(y))$ in $M$, hence $f'(x) < f'(y)$, by the definition of the order on $M'$.  Thus $f' : P \to M'$ is a monoid homomorphism (and in fact a sharp homomorphism).
+
+By the lifting property,~\eqref{eqn:3} has a lift.  Composing with the homomorphism ${M'}^{\rm gp} \to P^{\rm gp}$ (which does not preserve order), we obtain a left inverse to the homomorphism $P \to Q$.  This shows that $P^{\rm gp} \to Q^{\rm gp}$ is a split injection of abelian groups.  
+
+To see that the cokernel is torsion-free, we regard $P^{\rm gp}$ as a subgroup of $Q^{\rm gp}$ and let $h : Q^{\rm gp} \to P^{\rm gp}$ be a splitting of the inclusion.  If $x \in Q^{\rm gp}$ and $nx \in P^{\rm gp}$ for some integer $n \neq 0$ then $n h(x) \in P^{\rm gp}$, hence $n (h(x) - x) = 0$.  But $Q^{\rm gp}$ is torsion-free (since it is a saturated partially ordered abelian group) so this implies $h(x) = x$ and in particular that $x \in P^{\rm gp}$, as required.
+\end{proof}
+
+\begin{corollary}
+Suppose that $P \to Q \to M$ are monoid homomorphisms with $P \to M$ sharp and $Q$ finitely generated relative to $P$.  Then $P \to Q$ is \'etale at $Q \to M$ if and only if $P^{\rm gp} \to Q^{\rm gp}$ is an isomorphism.
+\end{corollary}
+\begin{proof}
+It is immediate that if $P^{\rm gp} \to Q^{\rm gp}$ is an isomorphism that $P \to Q$ is \'etale for any sharp $Q \to M$, by the proposition.
+
+If $P \to Q$ is smooth at $Q \to M$ then $P^{\rm gp} \to Q^{\rm gp}$ is injective with torsion-free cokernel.  But then the lifts of a diagram~\eqref{eqn:2} 
+\begin{equation} \label{eqn:2} \vcenter{ \xymatrix{
+P \ar[r] \ar[d] & M' \ar[d] \\
+Q \ar[r] \ar@{-->}[ur] & M
+} } \end{equation}
+will form a torsor under $\Hom(Q^{\rm gp} / P^{\rm gp}, K)$ where $K = \ker({M'}^{\rm gp} \to M^{\rm gp})$.  Since $Q^{\rm gp} / P^{\rm gp}$ is a torsion-free abelian group, this torsor will be trivial for all $K$ only if $Q^{\rm gp} / P^{\rm gp} = 0$.
+\end{proof}
+
+\begin{corollary}
+If $P \to Q$ is smooth (resp.\ \'etale) at a sharp homomorphism $Q \to M$ then it is smooth (resp.\ \'etale) at \emph{all} sharp homomorphisms $Q \to N$.
+\end{corollary}
+\begin{proof}
+By Proposition~\ref{prop:triv-smooth-etale}, it is sufficient to show that $P \to Q$ is smooth (resp.\ \'etale).  We will show first that it is smooth.  Let $Q' \to Q$ be an infinitesimal extension.  Let $M' \to M$ be the infinitesimal neighborhood of $M$ in $Q' \to M$.  By formal smoothness at $Q \to M$, we obtain a lift of the outer rectangle:
+\begin{equation*} \xymatrix{
+P \ar[r] \ar[d] & Q' \ar[r] \ar[d] & M' \ar[d] \\
+Q \ar@{-->}[urr]_(.7)g \ar@{-->}[ur] \ar@{=}[r] & Q \ar[r] & M
+} \end{equation*}
+Let $K$ be the kernel of ${Q'}^{\rm gp} = {M'}^{\rm gp} \to M^{\rm gp}$.  The choices of $g$ form a torsor under $\Hom(Q^{\rm gp}/P^{\rm gp}, K)$.  
+
+Let $Q'' = M' \mathop\times_M Q$.  We have a canonical inclusion $Q' \to Q''$, by the universal property of fiber product.  By pullback $g$ induces a lift $h : Q \to Q''$, and the obstruction to factorization of $h$ through $Q'$, on the level of groups, is its image in~\eqref{eqn:5}, where $L$ is the kernel of ${Q'}^{\rm gp} \to Q^{\rm gp}$:
+\begin{equation} \label{eqn:5}
+\Hom(Q^{\rm gp}/P^{\rm gp}, {Q''}^{\rm gp} / {Q'}^{\rm gp}) = \Hom(Q^{\rm gp}/P^{\rm gp}, K/L)
+\end{equation}
+But $Q^{\rm gp} / P^{\rm gp}$ is a torsion-free abelian group by Proposition~\ref{prop:torsion-free}, so $\Hom(Q^{\rm gp}/P^{\rm gp}, K^{\rm gp})$ acts transitively on $\Hom(Q^{\rm gp}/P^{\rm gp}, K/L)$.  Therefore there is a choice of $g$ such that the induced map $h$ factors through $Q'$, on the level of associated groups.  However, the projection $Q' \to Q$ is sharp, so factorization on the level of groups implies factorization on the level of monoids and we are done.
+
+Everything is easier when $P \to Q$ is formally \'etale at $Q \to M$, for in that case $K = 0$ and the choice of $g$ is unique.
+\end{proof}
+
+\begin{proposition}[Willis] \label{prop:etale-section}
+Let $P \to Q$ be smooth at $Q \to M$, where $M$ is totally ordered, $Q \to M$ is sharp, and $P \to M$ is surjective.  Then there is a $P \to P'$ that is \'etale at $P' \to M$, and a $P$-factorization $Q \to P' \to M$:
+\begin{equation*} \xymatrix@R=15pt{
+P \ar[rr]  \ar@{-->}[dr] \ar[dd] & & M \\
+ & P' \ar@{-->}[ur] \\
+Q \ar@/_20pt/[uurr] \ar@{-->}[ur] 
+} \end{equation*}
+\end{proposition}
+\begin{proof}
+Replacing $P$ with a localization, we may assume that $P \to Q$ is sharp and therefore that $P \to M$ is sharp.  
+
+Let $A = Q^{\rm gp}/ P^{\rm gp}$.  Then $A$ is a finitely generated, torsion-free abelian group, hence is projective.  Therefore there is a splitting $Q^{\rm gp} \simeq P^{\rm gp} \times A$.  Since $P \to M$ is surjective, we may choose a splitting $Q^{\rm gp} \to P^{\rm gp}$ so that $Q^{\rm gp} \to M^{\rm gp}$ factors through the projection $Q^{\rm gp} \to P^{\rm gp}$.  Therefore there is a commutative diagram:
+\begin{equation*} \xymatrix{
+P \ar[dr] \ar[d] \ar@/_15pt/[dd]_{\mathrm{id}} \\
+Q \ar[r] \ar@{-->}[d] & M \\
+P \ar[ur]
+} \end{equation*}
+The dashed arrow indicates that $Q \to P$ is only a homomorphism of associated groups.  Let $P'$ be the semiorder on $P^{\rm gp}$ generated by $Q$.  We note that this is actually a partial order, because $Q \to M$ is sharp.  Since $P \to P'$ is an isomorphism on associated groups, it is \'etale.
+\end{proof}
+
+\begin{proposition} \label{prop:points}
+The smooth topology on $P$ coincides with the \'etale topology.  It has enough points and these are all induced from surjective homomorphisms $P \to U$ where $U$ is totally ordered.
+\end{proposition}
+\begin{proof}
+We argue that in the lifting condition used to define smooth covers, it would have sufficed to assume $P \to V$ is surjective.  Indeed, if $P \to V$ is any homomorphism, let $U$ be its image with the order induced from the inclusion in $V$.  Assuming that we have a lift $P \to Q \to U$ such that $P \to Q$ is smooth at $Q \to U$, we obtain a lift $P \to Q \to V$ by composition.  If $V' \to V$ is an infinitesimal extension then $U' = V' \mathop\times_V U$ is an infinitesimal extension of $U$.  Lifting the square on the left suffices to lift the square on the right:
+\begin{equation} \label{eqn:4} \vcenter{ \xymatrix{
+P \ar[r] \ar[d] & U' \ar[r] \ar[d] & V' \ar[d] \\
+Q \ar[r] \ar@{-->}[ur] \ar@{-->}[urr] & U \ar[r] & V
+} } \end{equation}
+
+Now, if the composition $P \to Q \to V$ is surjective then, by Proposition~\ref{prop:etale-section}, there is an \'etale neighborhood $P \to P' \to V$ refining the smooth neighborhood $Q$ of $V$.  Therefore the tropical smooth and \'etale topologies coincide.
+
+An \'etale point of $P$ is a nonempty family of \'etale subsheaves $U_i$ of the functor represented by $P$ that is stable under intersection.  Each of these \'etale maps corresponds to an extension of the partial order on $P$ or a quotient of $P$.  The points are therefore the maximal extensions of the partial order, which are the total orders on quotients of $P$.
+\end{proof}
+
+\begin{corollary}
+Let $Q$ be a monoid.  Then $|\Cone Q|$ is the union of the images of $|\Cone^\circ R| \to |\Cone Q|$, taken over all localization homomorphisms $Q \to R$.
+\end{corollary}
+
+\begin{corollary}
+The smooth (resp.\ \'etale) locus of $P \to Q$ in $|\Cone Q|$ is a union of images of $|\Cone^\circ R| \to |\Cone Q|$ taken over all localizations $Q \to R$ such that $P \to Q$ is smooth (resp.\ \'etale) at $Q \to R$.
+\end{corollary}
+
+\section{Topological properties}
+
+\begin{definition}[Gillam]
+Suppose that $P \to Q_i$ are smooth morphisms.  We will say $Q_i$ overlaps $Q_j$ if the sequence
+\begin{equation*}
+0 \to P^{\rm gp} \to Q_i^{\rm gp} \oplus Q_j^{\rm gp} \to (Q_i \oplus_P Q_j)^{\rm gp} \to 0
+\end{equation*}
+is exact.
+\end{definition}
+
+\begin{lemma}
+Suppose that $P \to Q$ is a monoid homomorphism such that $P^{\rm gp} \to Q^{\rm gp}$ is an isomorphism.  Then the set of points of $|\Cone^\circ P|$ that fail to lift to points of $|\Cone^\circ Q|$ where $P \to Q$ is \'etale are described by the disjuntion of a finite number of nonstrict inequalities. 
+\end{lemma}
+\begin{proof}
+If $Q = P[\alpha]$ then $P \to Q$ fails to be \'etale precisely on the hyperplane where $\alpha$ vanishes.  The points that fail to lift are where $\alpha < 0$.  By induction on the generators of $Q$ relative to $P$, we obtain the lemma.
+\end{proof}
+
+\begin{remark}
+There is no subfunctor of $\Cone P$ whose points are $|\Cone^\circ P|$.
+\end{remark}
+
+\begin{lemma}[Gillam]
+Sharp homomorphisms $P \to Q$ and $P \to R$ overlap if and only if the fiber product $\Cone^\circ Q \mathop\times_{\Cone^\circ P} \Cone^\circ R$ is nonempty.
+\end{lemma}
+
+Let $P \to Q_i$ be an \'etale covering family of monoid homomorphisms such that $P^{\rm gp} \to Q_i^{\rm gp}$ is an isomorphism for all $i$.  Let $X$ be the simplicial complex whose $n$-simplices are the collections $Q_{i_1}, \ldots, Q_{i_n}$ whose cones overlap (algebraically, $Q_{i_1} + \cdots + Q_{i_n} \subset P^{\rm gp}$ is sharp).
+
+\begin{proposition}
+The simplicial complex $X$, defined above, is contractible.
+\end{proposition}
+\begin{proof}
+Since the $|\Cone^\circ Q_i|$ cover $|\Cone^\circ P|$, there is a finite subfamily of the $Q_i$ that still covers $P$.  Since $X$ is contractible if and only if all of its induced finite subcomplexes are, it suffices to assume that the family of $P \to Q_i$ is finite.
+
+Now assuming that $X$ is finite, it has a finite number of maximal simplices.  The proof will be by induction on the number $0$-dimensional simplices and the number of maximal simplices in $X$.
+
+If $X$ is not contractible then there must be some $0$-simplex $\sigma = \{ Q_i \}$ and a maximal simplex $\tau = \{ Q_{j_0}, \ldots, Q_{j_n} \}$ in $X$ such that $\sigma$ and $\tau$ do not meet.  Indeed, if $\tau$ met every maximal simplex, then for \emph{every} simplex $\omega$ of $X$, we would also have a simplex $\omega \cup \sigma$ and therefore $X$ would have a deformation retraction onto $\sigma$.
+
+Since $\sigma$ and $\tau$ do not overlap, there is some $f \in Q_i$ such that $-f \in Q_{j_0} + \cdots + Q_{j_n}$.  That is, $f \geq 0$ on $\Cone Q_i$ and $f \leq 0$ on $\Cone Q_{j_0} \cap \cdots \cap \Cone Q_{j_n}$.  We use $f$ to divide $X$ into simplicial complexes:
+\begin{align*}
+X_- & = \{ Q_k \: \big| \: \Cone^\circ(Q_k) \cap \Cone^\circ(P[-f]) \neq \varnothing \} \\
+X_0 & = \{ Q_k \: \big| \: \Cone^\circ(Q_k) \cap \Cone^\circ(P[\pm f]) \neq \varnothing \} \\
+X_+ & = \{ Q_k \: \big| \: \Cone^\circ(Q_k) \cap \Cone^\circ(P[f]) \neq \varnothing \}
+\end{align*}
+In other words, the complex $X_-$ consists of those $Q_k$ whose interiors meet $\{ f \leq 0 \}$, the complex $X_0$ consists of those $Q_k$ whose interiors meet $\{ f = 0 \}$, and the complex $X_+$ consists of those $Q_k$ whose interiors meet $\{ f \geq 0 \}$.  By construction, $\sigma \not\in X_-$ and $\tau \not\in X_+$ and neither $\sigma$ nor $\tau$ is in $X_0$.  
+
+We note that $P \to P[\pm f]$ is sharp:  if it were not then either $f$ or $-f$ would lie in $P$, in which case either $P \to Q_i$ or $P \to \sum Q_{j_\ell}$ would not be sharp.  Therefore $\Cone^\circ P[\pm f]$ lies in $\Cone^\circ P$, so that $\{ \Cone^\circ Q_i \cap \Cone^\circ P[\pm f] \to \Cone^\circ P[\pm f] \}$ form an \'etale cover.
+
+Therefore $X_-$, $X_0$, and $X_+$ are the simplicial complexes associated to \'etale covers of $P[-f]$, $P[\pm f]$, and $P[f]$, respectively. The induction hypothesis therefore implies that $X_-$, $X_0$, and $X_+$ are all contractible.  But $X = X_- \cup_{X_0} X_+$, so it follows that $X$ is contractible.
+\end{proof}
+
+
+\begin{proposition}
+Every cover of $|\Cone^\circ P|$ in the tropical \'etale topology has a refinement by a subdivision.
+\end{proposition}
+\begin{proof}
+Suppose that $\{ P \to Q_i \}$ is an \'etale covering family, with $P^{\rm gp} \to Q_i^{\rm gp}$ an isomorphism for every $i$ and each $Q_i$ is finitely generated relative to $P$.  We argue by induction on the number of the $Q_i$ and the number of their generators that there is a subdivision refining this cover.  Suppose that $Q_1 = P[x_1, \ldots, x_n]$.  We may subdivide $P$ into $P[x_1]$ and $P[-x_1]$.  Over $P' = P[x_1]$, the generator $x_1$ of $Q_1$ becomes redundant, so the total number of generators goes down.  Over $P'' = P[-x_1]$, the base change of $Q_1$ is $Q_1[-x_1]$, which factors through a localization of $P''$.  It is therefore not necessary to cover $|\Cone^\circ P|$ and we may discard it, therefore reducing the number of $Q_i$ by one over $P''$.
+\end{proof}
+
+
+\section{The sheaf of linear functions}
+
+\begin{corollary}[Willis]
+Let $P \to M$ be a homomorphism of saturated, partially ordered abelian groups.  Define $\tilde M(\Cone Q) = (M \mathop\oplus_P Q)^{\rm gp}$.  Then $\tilde M$ is a sheaf in the tropical \'etale topology.
+\end{corollary}
+\begin{proof}
+Pulling back a cover $\{ P \to Q_i \}$ to $M$, it is sufficient to assume that $P = M$.  Suppose $(x_i) \in \prod Q_i$ and $x_i$ and $x_j$ have the same image in $Q_i \oplus_P Q_j$ for all $i$ and $j$.  By the connectedness of the graph in Proposition~\ref{prop:graph}, we may find a path $i = i_1, \ldots, i_n = j$ such that $(Q_i \oplus_P Q_j)^{\rm gp} = P^{\rm gp}$.  This implies that $x_{i_1} = x_{i_2} = \cdots = x_{i_n} = x_j$, which implies that the equalizer of $\prod Q_i \rightrightarrows \prod Q_i \oplus_P Q_j$ is $P$, as required.
+\end{proof}
+
+\begin{corollary}[Willis] \label{cor:L-sheaf}
+The presheaf $\Cone(P) \mapsto P$ is a sheaf in the tropical \'etale topology.
+\end{corollary}
+\begin{proof}
+We have already seen that $\Cone(P) \mapsto P^{\rm gp}$ is a sheaf.  It remains to show that the partial order on $P^{\rm gp}$ can be recovered from an \'etale cover $\{ P \to Q_i \}$.  We note that $P$ is the intersection of all valuative submonoids of $P^{\rm gp}$, since any partial order on an abelian group can be extended to a total order.  Since every valuation of $P$ lifts to a valuation of some $Q_i$, we conclude that $P$, as a subset of $P^{\rm gp} = Q_i^{\rm gp}$, is the intersection of the $Q_i$.
+\end{proof}
+
+\begin{theorem}
+Let $\mathscr L(\Cone Q) = Q^{\rm gp}$ for all monoids $Q$.  Then $H^i(\Cone P, \mathscr L) = 0$ for all $i > 0$.
+\end{theorem}
+\begin{proof}
+The \v Cech complex is a sheaf with respect to the tropical \'etale topology.  We may therefore assume that $P$ is local in the tropical \'etale topology.  In that case, the $Q_i$ such that $P^{\rm gp} \to Q_i^{\rm gp}$ form a subcover, and every $P \to Q_j$ factors through one such $Q_i$.  The \v Cech complex of the subcover is quasi-isomorphism to the \v Cech complex of the original cover, so we can assume each $P^{\rm gp} \to Q_i^{\rm gp}$ is an isomorphism.  But $P$ is local, so this means that $P \to Q_i$ is an isomorphism.  Therefore the \v Cech complex is the $n$-fold tensor power of a contractible complex, hence is contractible.
+\end{proof}
+
+\section{The moduli stack of curves}
+
+\begin{definition}
+Let $P$ be a sharp monoid.  By a \emph{tropical curve} metrized by $P$ we will mean the following data:
+\begin{enumerate}
+\item a set $G$;
+\item a partially defined involution $i : G \to G$;
+\item a retraction $r : G \to G$;
+\item a function $\ell : G \to P \cup \{ \infty \}$, called the \emph{length};
+\end{enumerate}
+such that
+\begin{enumerate}[resume*]
+\item $\ell(g) = 0$ if and only if $i(g) = g$ if and only if $r(g) = g$; and
+\item $\ell9g) = \infty$ if and only if $i$ is not defined.
+\end{enumerate}
+\end{definition}
+
+If $P \to P'$ is a monoid homomorphism, and $\frak X$ is a tropical curve metrized by $P$, the \emph{induced} tropical curve metrized by $P'$ is obtained by collapsing the edges of $\frak X$ whose lengths project to $0$ in $P'$.
+
+One may put further constraints on $G$, such as weights on the vertices (to be construed as genera), labels on the legs (the edges with $\ell(g) = \infty$), or restrictions on the size of $G$ (finite, bounded genus, etc.).  Any of these additional constraints or structures could safely be added to the definition without affecting the remaining results of thise section.
+
+We define $\mathscr M$ to be the category covariantly fibered in groupoids over monoids consisting of pairs $(P, \frak X)$ where $P$ is a monoid and $\frak X$ is a tropical curve metrized by $P$.  
+
+\begin{theorem}
+$\mathscr M$ is a stack in the tropical \'etale topology.
+\end{theorem}
+\begin{proof}
+Let $\{ P \to Q_i \}$ be an \'etale covering family and let $\frak X_\bullet$ be a system of tropical curves indexed by the sieve generated by the $Q_i$.  The $|\Cone^\circ Q_i| \to |\Cone^\circ P|$, for $P \to Q_i$ sharp, form a contractible simplicial complex, so the underlying graphs $G_\bullet$, indexed by the $i$ such that $|\Cone Q_i| \to |\Cone P|$ meets the interior of $|\Cone P|$, can be assembled together to a single graph $G$.
+
+Now suppose that $P \to Q_i$ is any one of the morphisms in the family (not necessarily sharp).  Choose a sharp valuation $Q_i \to V$ and a lift $W \to V$ where $W$ is a sharp valuation of $P$.  Then $P \to W$ factors through some $Q_j$ with $P \to Q_j$ sharp.  Therefore we have a commutative diagram of edge contractions:
+\begin{equation*} \xymatrix{
+G \ar@{-->}[rr] \ar[d] & &  G_i \ar@{=}[d] \\
+G_j \ar[r] & G_W \ar[r] & G_V
+} \end{equation*}
+We therefore obtain an edge contraction $G \to G_i$.  We argue that this morphism of graphs is independent of the choices.  Instead of using a sharp valuation $Q_i \to V$ above, we chould have used the pushout $Q_i \oplus_P Q_j$, which shows that changing $V$ does not have any effect.  Instead of $W$, we could have used the infinitesimal neighborhood of $V$ in $P$.
+
+This lifts the graph to $\Cone P$.  To complete the construction, we must also lift the length function.  For each edge $g$ of $G$, the length function is a descent datum for a section of the sheaf $\mathscr L$ of linear functions.  As $\mathscr L$ is a sheaf, it descends.
+\end{proof}
+
+\section{Logarithmic geometry}
+
+Let $\LogSch$ denote the category of logarithmic schemes, with its canonical topology (covers are universal effectively epimorphic families).  We have a functor $a : \LogSch \to \Cones$ given by
+\begin{equation}
+a(X) = \Cone \Gamma(X, \overnorm M_X)
+\end{equation}
+
+\begin{proposition}
+The functor $a$ is cocontinuous.
+\end{proposition}
+\begin{proof}
+Let $P = \Gamma(X, \overnorm M_X)$.  Suppose that $R = \{ \Cone Q_i \to \Cone P \}$ is a tropical \'etale covering family of $\Cone P$.  Let $R_X$ be the induced family of maps $\{ Y_i \to X \}$.  Each $Y_i$ is representable by an open subset of a logarithmic blowup of $X$.  We argue that $R_X$ is a covering family in the canonical topology.
+
+This is a local assertion in the strict \'etale topology on $X$, so we may assume that $X = \Spec A$ and that $M_X$ has a global chart by $P$.
+
+\begin{lemma} \label{lem:surjective}
+The maps $Y_i \to X$ are jointly universally surjective.
+\end{lemma}
+\begin{proof}
+It is sufficient to show surjectivity on valuative geometric points, which is immediate from the definition of a covering family in $\Cones$.
+\end{proof}
+
+\begin{lemma} \label{lem:submersive}
+The maps $Y_i \to X$ are universally submersive.
+\end{lemma}
+\begin{proof}
+It is sufficient to show that the $Y_i \to X$ are submersive, since their construction commutes with base change.  Since the $P \to Q_i$ have a refinement by a subdivision, the $Y_i \to X$ have a refinement by a logarithmic modification $Z \to X$.  This map is proper and surjective, hence a submersion.
+\end{proof}
+
+\begin{lemma} \label{lem:top-gpd}
+Suppose that the underlying topological space of $X$ is a point and that $\overnorm M_X$ is constant.  Then the topological realization $|Y_\bullet|$ of the cover is contractible.
+\end{lemma}
+\begin{proof}
+Suppose that $y \in |Y_i|$.  If $Q_i \to \overnorm M_y$ is not sharp (so $y$ is not in the closed stratum of $Y_i$) then $Q_i^{\rm gp} \to \overnorm M_y^{\rm gp}$ has a nontrivial kernel.  By induction on the rank of $\overnorm M_X$, we can assume that the groupoid $|Y_\bullet \mathop\times_X y|$ is contractible.  Repeating if necessary, we can replace $y$ by a $y'$ from a contractible space of choices such that $y' \in |Y_j|$ and $Q_i \to \overnorm M_{y'}$ is sharp.
+
+The groupoid $|Y_\bullet|$ is therefore equivalent to the groupoid $|Y_\bullet^\circ|$ consisting only of those $y \in |Y_i|$ such that $Q_i \to \overnorm M_y$ is sharp.  But there is a unique such point in each $|Y_i|$, so the lemma now follows from the contractibility of the simplicial complex of overlaps between the $Q_i$ (Proposition~\ref{prop:contractible}.
+\end{proof}
+
+Combining Lemmas~\ref{lem:surjective},~\ref{lem:submersive}, and~\ref{lem:top-gpd}, we find that a compatible system of maps $Y_i \to Z$ descends to $|X| \to |Z|$ on the level of topological spaces (and therefore also on the level of reduced subschemes).  We wish to descend these to a morphism of schemes $X \to Z$.  This can be done locally in the \'etale topology on $Z$, so we can now assume that $Z$ is affine and has a global chart.
+
+But now we may choose a logarithmic modification $p : Y' \to X$ such that the map $Y_\bullet \to Z$ descends to $Y'$.  Since $Z$ is \emph{affine}, the map $Y' \to Z$ factors through the Stein factorization.  But $Y' \to X$ is a logarithmic modification, so we have $p_\ast \mathcal O_{Y'} = \mathcal O_X$ (this is true on the fibers, because they are proper toric varieties, and we apply cohomology and base change).  We therefore obtain a map of schemes $X \to Z$.
+
+To get a map of logarithmic schemes, we note that $p_\ast M_{Y'}^{\rm gp} = M_X^{\rm gp}$ by \cite[Theorem~4.4.1]{logpic}.  We also have $\overnorm M_X^{\rm gp} \mathop\times_{p_\ast \overnorm M_{Y'}^{\rm gp}} p_\ast \overnorm M_{Y'} = \overnorm M_X$ because every valuation of $\overnorm M_X$ lifts to a valuation of $\overnorm M_{Y'}$.  It follows that we have a unique morphism of logarithmic schemes $X \to Z$ inducing $Y_\bullet \to Z$.
+\end{proof}
+
+\begin{corollary}
+The topology generated by tropical \'etale covers is subcanonical.
+\end{corollary}
+
+\section{Examples}
+
+We give some examples of nontrivial covers in this topology.
+
+\subsection{The logarithmic multiplicative group}
+
+Let $S$ be a logarithmic scheme with $\overnorm\delta \in \Gamma(S, \overnorm M_S)$.  Define $\logGm^{(\overnorm\delta)}$ to be the subsheaf of $X \mapsto \Gamma(X, M_X^{\rm gp})$ consisting of those $\alpha$ that are bounded by $\overnorm\delta$ (there are integers $m$ and $n$ such that $m \overnorm\delta \leq \overnorm \alpha \leq n \overnorm\delta$).  
+
+For integers $m$ and $n$, let $U_{[m,n]}$ be the subfunctor of $\logGm^{(\delta)}$ where $m \delta \leq \overnorm\alpha \leq n \delta$.  Then $U_{[m,n]}$ is locally representable over $S$.  Indeed, choose a lift $\delta$ of $\overnorm\delta$ to $M_S$ (this may require localization in $S$) and then $\Spec \mathcal O_S[\alpha \delta^{-m}, \alpha^{-1} \delta^n]$ (with the evident logarithmic structure) represents $U_{[m,n]}$.  The maps $U_{[m,n]} \to \logGm^{(\delta)}$ form a cover.
+
+\subsection{Bounded homomorphisms}
+
+Let $\partial : H \times H \to \overnorm M_S^{\rm gp}$ be a positive definite bilinear pairing.  This means that, $\partial(e).e \geq 0$ for all $e \in H$ and that, for all $e, f \in H$, we have $\partial(e) . f \prec \partial(e).e$.  We write $\ell(e) = \partial(e).e$.  Let $\Hom(H, \logGm/\Gm)^\dagger$ be the sheaf of homomorphisms bounded by $\ell$ (meaning $\mu(e) \prec \ell(e)$ for all $e \in H$).  Because $\logGm/\Gm$ is a sheaf in the tropical \'etale topology (Corollary~\ref{cor:L-sheaf}), so is $\Hom(H, \logGm/\Gm)$.  The conditions $\mu(e) \prec \ell(e)$ are all local in the tropical \'etale topology (Corollary~\ref{cor:L-sheaf}, again) so $\Hom(H, \logGm)^\dagger$ is also a sheaf in the tropical \'etale topology.
+
+It is shown in \cite[Lemma~3.10.3.1]{logpic} that there is a finite set $C \subset H$ such that $\mu \in \Hom(H, \ologGm)$ lies in $\Hom(H, \ologGm)^\dagger$ if and only if $\mu(e) \prec \ell(e)$ for all $e \in C$.  For all integers $m$ and $n$, we define $Z_{m,n} \subset \Hom(H, \logGm)$ by the following formula:
+\begin{equation} \label{eqn:6}
+Z_{m,n} = \{ \mu \in \Hom(H, \ologGm) \: \big| \: \forall f \in C, \: m \ell(f) \leq \mu(f) \leq n \ell(f) \}
+\end{equation}
+Then by \cite[Lemma~3.10.3.1]{logpic}, we have $Z_{m,n} \subset \Hom(H, \ologGm)^\dagger$.
+
+\begin{lemma} \label{lem:cover}
+$\Hom(H, \ologGm)^\dagger = \bigcup_{m,n} Z_{m,n}$ as functors on $\Cones$.
+\end{lemma}
+\begin{proof}
+The condition $\mu(e) \prec \ell(e)$ is the disjunction of $m \ell(e) \leq \mu(e) \leq n \ell(e)$ for all integers $m$ and $n$.
+\end{proof}
+
+It is also shown in \cite[Lemma~3.10.3.2]{logpic} that $Z_{m,n}$, viewed as a functor on cones, is representable by the cone of a finitely generated monoid.
+
+\begin{proposition} \label{prop:Z-etale}
+Suppose that $\Cone M \to Z_{m,n}$ is a map corresponding to $\mu : H \to M^{\rm gp}$ such that, for each $f \in C$, either $\ell(f) = 0$ or $m \ell(f) < \mu(f) < n \ell(f)$.  Then $Z_{m,n} \to \Hom(H, \ologGm)^\dagger$ is tropically \'etale at $\Cone M$.
+\end{proposition}
+\begin{proof}
+We consider a lifting problem
+\begin{equation} \vcenter{\xymatrix{
+\Cone M \ar[r] \ar[d] & Z_{m,n} \ar[d] \\
+\Cone M' \ar@{-->}[ur] \ar[r] &  \Hom(H, \ologGm)^\dagger
+}} \end{equation}
+in which $M'$ is an infinitesimal extension of $M$.  The map $\Cone M' \to \Hom(H, \ologGm)^\dagger$ gives a homomorphism $\mu' : H \to {M'}^{\rm gp}$ such that the composition $\mu : H \to M^{\rm gp}$ satisfies $\ell(f) = 0$ or $m \ell(f) < \mu(f) < n \ell(f)$ for all $f \in C$.  But if $\ell(f) = 0$ in $M^{\rm gp}$ then $\ell(f) = 0$ in ${M'}^{\rm gp}$, since $M' \to M$ is sharp, and if $m \ell(f) < \mu(f) < n \ell(f)$ in $M^{\rm gp}$ then the same holds in $M'$ since $M' \to M$ is an infinitesimal extension.
+\end{proof}
+
+\begin{lemma} \label{lem:add-one}
+Suppose that $\Cone M \to Z_{m,n}$ is a map corresponding to $\mu : H \to M^{\rm gp}$.  Then either $\ell(f) = 0$ in $M$ or $(m-1) \ell(f) < \mu(f) < (n+1) \ell(f)$ for each $f \in C$.
+\end{lemma}
+\begin{proof}
+If $\ell(f) \neq 0$ then $\ell(f) > 0$.
+\end{proof}
+
+\begin{theorem}
+The maps $Z_{m,n} \to \Hom(H, \ologGm)^\dagger$ form a tropically \'etale cover.
+\end{theorem}
+\begin{proof}
+Suppose we have a valuative point $\mu$ of $\Hom(H, \ologGm)^\dagger$.  By Lemma~\ref{lem:cover}, it can be lifted to some $Z_{m,n}$ and by Lemma~\ref{lem:add-one}, the lift will either have $\ell(f) = 0$ or $(m-1) \ell(f) < \mu(f) < (n+1) \ell(f)$ for each $f \in C$.  Therefore by Proposition~\ref{prop:Z-etale}, the map $Z_{m-1,n+1} \to \Hom(H, \ologGm)^\dagger$ is tropically \'etale at $\mu$.
+\end{proof}
+
+\subsection{Tropical abelian varieties}
+
+\begin{theorem}
+Let $\partial : H \times H \to M^{\rm gp}$ be a positive definite bilinear pairing.  Then $\Hom(H, \ologGm)^\dagger / \partial(H)$ is a sheaf in the tropical \'etale topology on $\Cones$ and is locally representable in the tropically \'etale topology.
+\end{theorem}
+
+Let $\mathcal H$ denote the image of the homomorphism $\partial : H \to \ologGm$.  Then $\Hom(H, \ologGm)^\dagger = \Hom(\mathcal H, \ologGm)$ and $\Hom(H, \ologGm)^\dagger = \Hom(\mathcal H, \ologGm) / \mathcal H$.
+
+\begin{lemma}
+Let $M$ be a monoid.  Then all $\mathcal H$-torsors in the tropical \'etale topology on $\Cone M$ are trivial.
+\end{lemma}
+
+
+\subsection{Logarithmic abelian varieties}
+
+Let $A$ be a logarithmic abelian variety over $S$.  Then there is an exact sequence
+\begin{equation}
+0 \to A^{\rm alg} \to A \to A^{\rm trop} \to 0
+\end{equation}
+where $A^{\rm alg}$ is a semiabelian variety and $A^{\rm trop}$ is a quotient $\Hom(H, \ologGm)^\dagger / \partial(H)$ where $\partial : H \times H \to \overnorm M_S$ is a positive definite quadratic form. 
+
+ 
+\subsection{The logarithmic Picard group}
+
+Let $\pi : X \to S$ be a family of proper, vertical logarithmic curves over $S$.  It is shown in \cite{logpic} that there is an exact sequence of sheaves on the large, strict \'etale site of $S$:
+\begin{equation} 
+0 \to \Pic^{[0]}(X/S) \to \LogPic(X/S) \to \TroPic(X/S) \to 0
+\end{equation}
+We argue that $\LogPic(X/S)$ and $\TroPic(X/S)$ are both sheaves in the tropical \'etale topology and are locally representable in the topology generated by the tropical \'etale and strict \'etale topologies.  Since $\Pic^{[0]}(X/S)$ has both of these properties, it suffices to demonstrate them for $\TroPic(X/S)$.
+
+We recall that $\TroPic(X/S)$ is a disjoint union of $\TroPic^0(X/S)$-torsors (in the strict \'etale topology), $\TroPic^n(X/S)$.  It therefore suffices to show that $\TroPic^0(X/S)$ is a sheaf and is locally representable.  We have a presentation:
+\begin{equation}
+\TroPic^0(X/S) = \Hom(H_1(\frak X), \logGm)^\dagger / \partial H_1(\frak X)
+\end{equation}
+Here we regard $H_1(\frak X)$ as a (non-locally constant!) strict \'etale sheaf on $S$.  The $\dagger$ indicates restriction to homomorphisms with bounded monodromy.  The quotient is taken in the category of sheaves in the strict \'etale topology.
+
+It therefore suffices to prove that $\Hom(H_1(\frak X), \logGm)^\dagger$ is a locally representable sheaf and that $H_1(\frak X)$-torsors on $S$ in the tropical \'etale topology are locally trivial in the strict \'etale topology.  The latter assertion follows from the contractibility of $|\Cone^\circ P|$ in the tropical \'etale topology.  The former assertion is local in $S$, so we may choose a basis for $H_1(\frak X)_s$ and identify make an identification
+\begin{equation}
+\Hom(H_1(\frak X), \logGm)^\dagger = \prod_i \logGm^{(\delta_i)}
+\end{equation}
+where $\delta_i$ is the length of the corresponding basis element of 
+
+
+
+\section{Acknowledgements}
+
+The second author is grateful for the hospitality of Brown University, where part of this paper was written, and for the support of the Simons Foundation.
+
+\end{document}
+
+\begin{proposition} \label{prop:graph}
+Let $\{ P \to Q_i \}$ be an \'etale cover.  The graph of overlaps between the $Q_i$ in $\Cone^\circ P$ is connected.
+\end{proposition}
+\begin{proof}
+By quasicompactness of $\Cone^\circ P$, we can assume that the number of $Q_i$ is finite.  We argue by induction on the number $n$ of $Q_i$ and the number of their generators.  Assume (without loss of generality) that $Q_1$ and $Q_2$ do not overlap.  Then there is some $x \in P^{\rm gp}$ such that $x > 0$ in $\Cone^\circ Q_1$ and $x < 0$ in $\Cone^\circ Q_2$ (in other words, $Q_1[-x] = Q_2[x] = 0$).  The inequalities $x \leq 0$ and $x \geq 0$ subdivide $P$ into $P[-x]$ and $P[x]$ and the $Q_i[x]$ and $Q_i[-x]$ cover these, respectively.  But $\Cone Q_1[-x]$ does not meet $\Cone^\circ P[-x]$ and $\Cone Q_2[x]$ does not meet $\Cone^\circ P[x]$.  Therefore the graphs $G_1$ and $G_2$ of overlaps of the $Q_i[-x]$ and $Q_i[x]$ have fewer than $n$ vertices.  In particular, they are connected, by induction.
+
+To conclude, we only need to see that $G_1$ and $G_2$ meet in $G$.  For this, choose any valuation $P[\pm x] \to V$ (note that $P[\pm x]^{\rm gp} = P^{\rm gp}$ since neither $x$ nor $-x$ is $\geq 0$ in $\Cone^\circ P$).  Then $V$ lifts to some $Q_i$ where $P \to Q_i$ is \'etale at $Q_i \to V$.  Then $\Cone Q_i$ overlaps both $\Cone^\circ P[x]$ and $\Cone^\circ P[-x]$, so it lies in both $G_1$ and in $G_2$.
+\end{proof}
